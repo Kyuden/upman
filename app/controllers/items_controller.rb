@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.image = params[:item][:image].read
-    #@item.image_content_type = params[:item][:image].content_type
+    @item.image_content_type = params[:item][:image].content_type
 
     respond_to do |format|
       if @item.save
@@ -64,8 +64,7 @@ class ItemsController < ApplicationController
   end
 
   def image
-    #send_data(@item.image, type: @item.image_content_type, disposition: :inline)
-    send_data(@item.image, type: "image/jpeg", disposition: :inline)
+    send_data(@item.image, type: @item.image_content_type, disposition: :inline)
   end
 
   private
