@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :image]
 
   # GET /items
   # GET /items.json
@@ -25,6 +25,8 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
+    @item.image = params[:item][:image].read
+    @item.image_content_type = params[:item][:image].content_type
 
     respond_to do |format|
       if @item.save
@@ -61,6 +63,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def image
+    send_data(@item.image, type: @item.image_content_type, disposition: :inline)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -69,6 +75,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :image)
+      params.require(:item).permit(:name)
     end
 end
