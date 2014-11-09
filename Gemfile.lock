@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/kyuden/postgres-copy.git
-  revision: 37cf4353942d919b5cf8f6150a11040f4c0e00e7
+  revision: 40bcd2f6e09d2082f1edbb682b848541762154f4
   specs:
     postgres-copy (0.9.0)
       activerecord (>= 4.0)
