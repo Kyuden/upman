@@ -8,8 +8,12 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        Item.copy_to "/tmp/items.csv"
-        send_file "/tmp/items.csv"
+        File.open('items.csv', 'w') do |f|
+          Item.copy_to do |line|
+            f.write line
+          end
+        end
+        send_file 'items.csv'
       end
     end
   end
