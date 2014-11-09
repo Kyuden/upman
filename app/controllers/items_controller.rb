@@ -5,10 +5,12 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
-    Item.copy_to "/tmp/items.csv"
     respond_to do |format|
       format.html
-      format.csv { send_file "/tmp/items.csv" }
+      format.csv do
+        Item.copy_to "/tmp/items.csv"
+        send_file "/tmp/items.csv"
+      end
     end
   end
 
