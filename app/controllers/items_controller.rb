@@ -5,6 +5,20 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
+    Item.copy_to "/tmp/items.csv"
+    respond_to do |format|
+      format.html
+      format.csv { send_file "/tmp/items.csv" }
+    end
+  end
+
+  def import_csv
+    Item.delete_all
+    if Item.copy_from(params[:file].path)
+      redirect_to items_path, :notice => "CSVファイルの読み込みに成功しました"
+    else
+      redirect_to items_path, :notice => "CSVファイルの読み込みに失敗しました。"
+    end
   end
 
   # GET /items/1

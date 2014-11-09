@@ -29,6 +29,7 @@ gem 'haml-rails'
 gem 'mini_magick'
 gem 'rails_12factor', group: :production
 gem "erb2haml", :group => :development
+gem 'postgres-copy'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

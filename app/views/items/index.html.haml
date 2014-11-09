@@ -1,5 +1,9 @@
 %p#notice= notice
 %h1 Listing Items
+= link_to 'CSV形式でダウンロード', items_path(format: "csv")
+= form_tag import_csv_items_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Import"
 %table
   %thead
     %tr
